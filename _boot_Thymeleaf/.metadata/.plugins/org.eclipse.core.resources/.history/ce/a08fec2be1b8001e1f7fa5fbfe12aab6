@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 th:text="${msg}"></h1>
+	<h1>hello world~~~~~~~~~!</h1>
+	<h1>[[${msg}]]</h1>
+	<h1>${msg}</h1>
+	<!--/*주석 라인 : 이중 주석을 해줘야 f12눌렀을 때 표시되지 않음*/-->
+	
+	<div th:with="num1=${10}, num2=${20}">
+		<h3 th:text="${num1+num2}"></h3>
+	</div>
+	<hr>
+	
+	<h3 th:text="${param.name}"></h3>
+	<h3 th:text="${param.age}"></h3>	
+	<a href="/ex/ex1">Go to ex/ex1</a>
+
+</body>
+</html>
