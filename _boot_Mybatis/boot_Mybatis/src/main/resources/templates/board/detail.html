@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{/layout :: setFragment(~{this::content})}">
+	<th:block th:fragment="content">
+	<div class="container">
+<table class="table table-bordered border-primary">
+<tr>
+<th>제목</th><td>[[${bvo.title }]]</td>
+</tr>
+<tr>
+<th>글쓴이</th><td>[[${bvo.writer }]]</td>
+</tr>
+<tr>
+<th>작성일</th><td>[[${bvo.regAt }]]</td>
+</tr>
+<tr>
+<th>수정일</th><td>[[${bvo.modAt }]]</td>
+</tr>
+<tr>
+<th>내용</th><td>[[${bvo.content }]]</td>
+</tr>
+</table>
+<form action="/board/romove" method="post" id="delForm" style="display:none;">
+	<input type="hidden" name="bno" th:value="${bvo.bno}">
+</form>
+<a th:href="@{/board/modify(bno=${bvo.bno })}"><button type="button" class="btn btn-primary">수정</button></a>
+<a th:href="@{/board/remove(bno=${bvo.bno })}"><button type="button" class="btn btn-primary">삭제</button></a>
+</div>
+<!-- 코멘트 라인 -->
+<!-- 등록 -->
+<div class="container-sm">
+	<div class="input-group mb-3">
+	  <span class="input-group-text" id="cmtWriter">@</span>
+	  <input type="text" class="form-control" id="cmtText" placeholder="Add comment" aria-label="Username" aria-describedby="basic-addon1">
+	  <button type="button" id="cmtPostBtn" class="btn btn-primary">등록</button>
+	</div>
+	<!-- 표시 -->
+	<ul class="list-group list-group-flush" id="cmtListArea">
+	  <li class="list-group-item">
+		  <div>writer</div>
+	  		content
+	  	<span>modAt</span>
+	  </li>
+	</ul>
+	
+	<!-- more button -->
+	<div class="row">
+	<div class="col dgrid">
+		<button type="button" id="moreBtn" data-page="1"
+			class="btn btn-outline-secondary btn-block" style="visibility:hodden"></button>
+	</div>
+	</div>
+	
+	<!-- modal line -->
+	
+	<div class="modal" id="myModal" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title">Modal title</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <div class="input-group mb-3">
+			  <input type="text" class="form-control" id="cmtText" placeholder="Add comment" aria-label="Username" aria-describedby="basic-addon1">
+			  <button type="button" id="cmtPostBtn" class="btn btn-primary">등록</button>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	     </div>
+	    </div>
+	  </div>
+	</div>
+</div>
+<script>
+	const bnoVal = [[${bvo.bno}]];
+</script>
+<script th:src="@{/js/boardComment.js}"></script>
+<script th:src="@{/js/boardDetail.js}"></script>
+<script>spreadCommentList(bnoVal);</script>
+</th:block>
+</th:block>

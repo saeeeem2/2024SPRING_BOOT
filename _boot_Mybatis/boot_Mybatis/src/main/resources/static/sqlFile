@@ -9,3 +9,15 @@ content text not null,
 reg_at datetime default now(),
 mod_at datetime default now(),
 primary key(bno));
+
+
+
+----------202040125-----------
+create table comment(
+cno bigint auto_increment,
+bno bigint not null,
+writer varchar(200) not null,
+content text not null,
+reg_at datetime default now(),
+mod_at datetime default now(),
+primary key(cno));
