@@ -10,7 +10,7 @@ import com.example.demo.domain.PagingVO;
 @Mapper
 public interface BoardMapper {
 
-	void insert(BoardVO bvo);
+	int insert(BoardVO bvo);
 
 	List<BoardVO> list(PagingVO pgvo);
 
@@ -21,5 +21,7 @@ public interface BoardMapper {
 	int remove(long bno);
 
 	int getTotalCount(PagingVO pgvo);
+
+	long getBno();
 
 }

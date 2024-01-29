@@ -119,6 +119,15 @@ document.addEventListener('click',(e)=>{
 			}
 		})
 	}else if(e.target.classList.contains('del')){
+		//삭제
+		let li=e.target.closest('li');
+		let cnoVal=li.dataset.cno;
+		removeCommentToServer(cno).then(result=>{
+			if(result==='1'){
+				alert('삭제완료');
+				spreadCommentList(bnoVal);
+			}
+		})
 		
 	} else if(e.target.id=='moreBtn'){
 		spreadCommentList(bnoVal,parseInt(e.target.dataset.page));
@@ -141,6 +150,20 @@ async function editCommentToServer(cmtDataMod){
 		return result;
 		
 	}catch(error){
+		console.log(error);
+	}
+}
+
+async function removeCommentToServer(cno){
+	try{
+	const url="/comment/remove/"+cno;
+	const config={
+		mothod:'delete',
+	};
+	const resp=await fetch(url,config);
+	const result=await resp.text();
+	return rMediaQueryList
+	} catch{
 		console.log(error);
 	}
 }

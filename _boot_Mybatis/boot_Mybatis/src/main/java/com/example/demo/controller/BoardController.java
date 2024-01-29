@@ -2,18 +2,25 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.domain.BoardDTO;
 import com.example.demo.domain.BoardVO;
+import com.example.demo.domain.FileVO;
 import com.example.demo.domain.PagingVO;
+import com.example.demo.handler.FileHandler;
 import com.example.demo.handler.PagingHandler;
 import com.example.demo.service.BoardService;
 
+import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,16 +30,27 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/board/*")
 public class BoardController {
 
-//	private final logger log = LogFactory.getLogger(BoardController.class);
+	private final Logger log = LoggerFactory.getLogger(BoardController.class);
 	
-	private final BoardService bsv;
+	@Inject
+	private BoardService bsv;
+	
+	@Inject
+	private FileHandler fh;
 	
 	@GetMapping("/register")
 	public void register() {}
 	
 	@PostMapping("/register")
-	public String register(BoardVO bvo) {
-		bsv.register(bvo);
+	public String register(BoardVO bvo,@RequestParam(name="files",required=false)MultipartFile[] files) {
+		
+		List<FileVO>flist=null;
+		if(files[0].getSize()>0||files!=null) {
+			//파일 핸들러 작업
+			flist=fh.uploadFiles(files);
+		}
+		bsv.register(new BoardDTO(bvo,flist));
+		//파일 업로드 부분 추가 		
 		return "index";
 	}
 	
@@ -50,8 +68,8 @@ public class BoardController {
 	
 	@GetMapping({"/detail","/modify"})
 	public void detail(@RequestParam("bno")long bno,Model m) {
-		BoardVO bvo = bsv.selectOne(bno);
-		m.addAttribute("bvo", bvo);
+		BoardDTO bdto = bsv.selectOne(bno);
+		m.addAttribute("bdto", bdto);
 	}
 	
 	@PostMapping("/modify")

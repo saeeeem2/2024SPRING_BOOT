@@ -10,6 +10,7 @@ import com.example.demo.handler.PagingHandler;
 import com.example.demo.repository.BoardMapper;
 import com.example.demo.repository.CommentMapper;
 
+import jakarta.inject.Inject;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,9 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class CommentServiceImpl implements CommentService{
 
-	private final CommentMapper cm;
+	@Inject
+	private CommentMapper cm;
 
-	private final BoardMapper bm;
+	@Inject
+	private BoardMapper bm;
 
 	@Override
 	public int post(CommentVO cvo) {
@@ -47,6 +50,12 @@ public class CommentServiceImpl implements CommentService{
 	public int edit(CommentVO cvo) {
 		
 		return cm.edit(cvo);
+	}
+
+	@Override
+	public int remove(long cno) {
+		
+		return cm.remove(cno);
 	}
 
 }
