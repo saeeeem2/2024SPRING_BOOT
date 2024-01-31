@@ -21,3 +21,23 @@ content text not null,
 reg_at datetime default now(),
 mod_at datetime default now(),
 primary key(cno));
+
+
+----------202040130-----------
+
+
+
+member table구성
+create table member(
+email varchar(200) not null,
+pwd varchar(256) not null,
+nick_name varchar(100),
+reg_at datetime default now(),
+last_login datetime,
+primary key(email));
+
+create table auth_member(
+email varchar(200) not null,
+auth varchar(100)not null,
+foreign key(email) references member(email)); 
+

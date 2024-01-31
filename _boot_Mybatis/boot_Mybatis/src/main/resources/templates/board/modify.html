@@ -24,8 +24,20 @@
 		  <label for="content" class="form-label">내용</label>
 		  <textarea class="form-control" name="content" id="content" rows="3">[[${bdto.bvo.content }]]</textarea>
 		</div>
+		<div class="mb-3">
+		  	<label for="file" class="form-label">files...</label>
+		  	<input type="file" name="files" class="form-control" id="files" multiple style="display:none"><br>
+		  	<button type="button" class="btn btn-primary" id="trigger">fileUpload</button>
+		</div>
+		<div class="mb-3">
+			파일 목록 표시라인
+			<div id="fileZone" class="mb-3">
+			파일 목록
+			</div>
+		</div>
 		<button type="submit" id="regBtn" class="btn btn-primary">수정</button>
 		</form>
 		</div>
+		<script th:src="@{/js/boardRegister.js}"></script>
 </th:block>
 </th:block>

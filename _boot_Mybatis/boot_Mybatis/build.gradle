@@ -30,6 +30,10 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	annotationProcessor 'org.projectlombok:lombok'
 	
+	//-------------------------------
+	implementation "org.springframework.boot:spring-boot-starter-security"
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'
+	
 	//----------추가-------------------
 	implementation 'jakarta.inject:jakarta.inject-api:2.0.1'
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-configuration-processor

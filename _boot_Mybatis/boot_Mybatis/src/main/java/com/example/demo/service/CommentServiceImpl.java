@@ -35,16 +35,11 @@ public class CommentServiceImpl implements CommentService{
 	public PagingHandler getList(long bno, PagingVO pgvo) {
 		// TODO Auto-generated method stub
 		int totalCount = cm.selectOneBnoTotalCount(bno);
-//		List<CommentVO> list = cm.getList(bno, pgvo);
-		PagingHandler ph = new PagingHandler(pgvo, totalCount);
+		List<CommentVO> list = cm.getList(bno, pgvo);
+		PagingHandler ph = new PagingHandler(pgvo, totalCount, list);
 		return ph;
 	}
 
-	@Override
-	public List<CommentVO> getList(long bno) {
-		// TODO Auto-generated method stub
-		return cm.getList(bno);
-	}
 
 	@Override
 	public int edit(CommentVO cvo) {
