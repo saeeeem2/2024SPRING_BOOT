@@ -31,6 +31,7 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDTO> getList() {
 		//db에서 list로 리턴이 되기 때문에 Board list로 리턴 => dto객체로 변환
+		//(Sort.by(Sort.Direction.DESC,"기준 칼럼명")
 		List<Board> list=repository.findAll(Sort.by(Sort.Direction.DESC,"bno"));
 		List<BoardDTO> dtoList=new ArrayList<>();
 		for(Board board:list) {
