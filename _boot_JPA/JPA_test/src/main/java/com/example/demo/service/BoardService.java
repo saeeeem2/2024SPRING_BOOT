@@ -2,6 +2,8 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.example.demo.dto.BoardDTO;
 import com.example.demo.entity.Board;
 
@@ -16,9 +18,16 @@ public interface BoardService {
 	}
 	
 	//db(entity객체=board)에서 가져온 데이터를 boarddto객체로 변환
-	default BoardDTO convertEntityToDto(BoardDTO bdto) {
-		return BoardDTO.builder().bno(board.getBno()).title(board.getTitle()).writer(board.getWiter()).content(board.getContent()).build();
+	default BoardDTO convertEntityToDto(Board board) {
+		return BoardDTO.builder().bno(board.getBno()).title(board.getTitle()).writer(board.getWriter()).content(board.getContent()).build();
 	}
 
-	List<BoardDTO> getList();
+//	List<BoardDTO> getList();
+	Page<BoardDTO> getList(int page);
+
+	BoardDTO getDetail(Long bno);
+
+	Long modify(BoardDTO bdto);
+
+	void remove(Long bno);
 }

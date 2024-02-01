@@ -33,20 +33,20 @@
 		<nav aria-label="Page navigation example">
 		  <ul class="pagination .justify-content-center:">
 		  
-		    <li th:if="${ph.prev}" class="page-item">
-		      <a class="page-link" th:href="@{/board/list(pageNo=${ph.startPage-1}, qty=${ph.pgvo.qty}, type=${ph.pgvo.type), keyword=${ph.pgvo.keyword}" aria-label="Previous">
+		    <li th:if="${pageVO.hasPrev}" class="page-item">
+		      <a class="page-link" th:href="@{/board/list(pageNo=${pageVO.startPage-1}, qty=${ph.pgvo.qty}, type=${ph.pgvo.type), keyword=${ph.pgvo.keyword}" aria-label="Previous">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
 		    </li>
 		    
 		    <!-- th:classappend : 동적 클래스 추가 -->
-		    <li th:each="i: ${#numbers.sequence(ph.startPage,ph.endPage)}" class="page-item ${ph.pgvo.pageNo==i ? 'active' : ''}">
+		    <li th:each="i: ${#numbers.sequence(pageVO.startPage,pageVO.endPage)}" class="page-item ${pageVO.pageNo==i ? 'active' : ''}">
 		    	<a class="page-link" th:href="@{/board/list(pageNo=${i}, qty=${ph.pgvo.qty})}">
 		    		[[${i}]]
 		    	</a>
 		    </li>
 		    
-		    <li th:if="${ph.next}" class="page-item">
+		    <li th:if="${pageVO.hasNext}" class="page-item">
 		      <a class="page-link" th:href="@{/board/list(pageNo=${ph.endPage+1}, qty=${ph.pgvo.qty})}" aria-label="Next">
 		        <span aria-hidden="true">&raquo;</span>
 		      </a>
